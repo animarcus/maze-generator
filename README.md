@@ -1,1 +1,1 @@
-# template-project
+# Maze generator
