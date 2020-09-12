@@ -48,7 +48,6 @@ function draw() {
     if (solver.i === exitPoint[0] && solver.j === exitPoint[1]) {
       solver.i = 0;
       solver.j = 0;
-      solvedPath = [];
     } else {
       maze.solveMaze();
     }
@@ -134,12 +133,4 @@ function removeWalls(a, b) {
     b.walls[0] = false;
   }
 
-}
-
-
-
-
-function restartGame() {
-  location.reload();
-  return false;
 }

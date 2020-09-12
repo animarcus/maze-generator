@@ -48,7 +48,6 @@ function draw() {
     if (solver.i === exitPoint[0] && solver.j === exitPoint[1]) {
       solver.i = 0;
       solver.j = 0;
-      solvedPath = [];
     } else {
       maze.solveMaze();
     }
@@ -74,7 +73,7 @@ let maze = {
       current = stack.pop();
       if (stack.length == 0) {
         frameRate(3);
-        solver = new Solver(0, 0);
+        solver = new Solver(2, 2);
         generated = true;
 
         solveOK = true;
@@ -134,12 +133,4 @@ function removeWalls(a, b) {
     b.walls[0] = false;
   }
 
-}
-
-
-
-
-function restartGame() {
-  location.reload();
-  return false;
 }

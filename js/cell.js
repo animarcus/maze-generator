@@ -1,17 +1,17 @@
-function Cell(i, j) {
-  this.i = i;
-  this.j = j;
-  this.walls = [true,true,true,true];
-  this.visited = false;
-
-  this.checkNeighbors = function() {
+class Cell {
+  constructor(i, j) {
+    this.i = i;
+    this.j = j;
+    this.walls = [true,true,true,true];
+    this.visited = false;
+  }
+  checkNeighbors() {
     let neighbors = [];
     // console.log(index(i+1  , j   ));
-    let top     = grid[index(i    , j-1 )];
-    let right   = grid[index(i+1  , j   )];
-    let bottom  = grid[index(i    , j +1)];
-    let left    = grid[index(i-1  , j   )];
-
+    let top     = grid[index(this.i    , this.j-1 )];
+    let right   = grid[index(this.i+1  , this.j   )];
+    let bottom  = grid[index(this.i    , this.j +1)];
+    let left    = grid[index(this.i-1  , this.j   )];
     if (top && !top.visited) {
       neighbors.push(top);
     }
@@ -30,21 +30,18 @@ function Cell(i, j) {
     } else {
       return undefined;
     }
-  };
-
-  this.highlight = function() {
+  }
+  highlight() {
     let x = this.i * w;
     let y = this.j * w;
     fill(150, 0, 0, 255);
     noStroke();
     rect(x, y, w, w);
-  };
-
-  this.show = function() {
+  }
+  show() {
     let x = this.i*w;
     let y = this.j*w;
     stroke(255);
-
     if (this.walls[0]) {
       line(x,y,x+w,y);
     }
@@ -57,11 +54,10 @@ function Cell(i, j) {
     if (this.walls[3]) {
       line(x,y+w,x,y);
     }
-
     if (this.visited) {
       noStroke();
       fill(100, 255, 100, 150);
       rect(x, y, w, w);
     }
-  };
+  }
 }

@@ -2,7 +2,7 @@
 
 
 let cols, rows;
-let w = 40;
+let w = 80;
 let grid = [];
 let current;
 let stack = [new Cell(0, 0)];
@@ -134,12 +134,4 @@ function removeWalls(a, b) {
     b.walls[0] = false;
   }
 
-}
-
-
-
-
-function restartGame() {
-  location.reload();
-  return false;
 }

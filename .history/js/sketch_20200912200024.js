@@ -2,7 +2,7 @@
 
 
 let cols, rows;
-let w = 40;
+let w = 80;
 let grid = [];
 let current;
 let stack = [new Cell(0, 0)];
@@ -48,7 +48,6 @@ function draw() {
     if (solver.i === exitPoint[0] && solver.j === exitPoint[1]) {
       solver.i = 0;
       solver.j = 0;
-      solvedPath = [];
     } else {
       maze.solveMaze();
     }
@@ -74,7 +73,7 @@ let maze = {
       current = stack.pop();
       if (stack.length == 0) {
         frameRate(3);
-        solver = new Solver(0, 0);
+        solver = new Solver(2, 2);
         generated = true;
 
         solveOK = true;
@@ -97,12 +96,13 @@ let maze = {
     solver.move();
   },
   drawSolvedPath : function(coords, index) {
-    let x = coords.i;
-    let y = coords.j;
+    rect(0, 0, 50,50)
+    let i = coords[0];
+    let j = coords[1];
     console.log(" ");
-    console.log(x, y);
-    fill(color("blue"));
-    rect(x + w/2 - w/10, y + w/2-w/10, w/5, w/5);
+    console.log(i, j);
+    // fill(color("red"));
+    rect(i, j, 50,50);
   }
 };
 
@@ -134,12 +134,4 @@ function removeWalls(a, b) {
     b.walls[0] = false;
   }
 
-}
-
-
-
-
-function restartGame() {
-  location.reload();
-  return false;
 }

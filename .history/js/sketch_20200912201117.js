@@ -135,11 +135,3 @@ function removeWalls(a, b) {
   }
 
 }
-
-
-
-
-function restartGame() {
-  location.reload();
-  return false;
-}
