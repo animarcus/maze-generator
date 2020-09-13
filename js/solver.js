@@ -9,7 +9,6 @@ class Solver {
     this.current = grid[index(this.i, this.j)];
 
     fill(color("red"));
-    // this.direction = Math.abs(this.direction);
     let x = this.i*w;
     let y = this.j*w;
     if (this.direction % 4 === 0) {
@@ -28,7 +27,6 @@ class Solver {
   }
   move() {
     solvedPath.push({"i" : this.i*w, "j" : this.j*w});
-    // console.log(" ");
     if (this.current.walls[solveDirection(this.direction)] ||
         (this.facing.i === undefined || this.facing.j === undefined)) {//iswallfront
       // console.log("wall in front"); // wall in front
@@ -53,16 +51,12 @@ class Solver {
         this.direction += 1;
       }
     }
-    // up wall check : this.current.walls[0] && this.facing.walls[2]
-    // right wall check : this.current.walls[1] && this.facing.walls[3]
-    // down wall check : this.current.walls[2] && this.facing.walls[0]
-    // left wall check : this.current.walls[3] && this.facing.walls[1]
   }
 }
 
 
 function solveDirection(dir) {
-  if (dir < 0) {
+  while (dir < 0) {
     dir += 4;
   }
   if (dir % 4 === 0) {

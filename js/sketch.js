@@ -99,8 +99,8 @@ let maze = {
   drawSolvedPath : function(coords, index) {
     let x = coords.i;
     let y = coords.j;
-    console.log(" ");
-    console.log(x, y);
+    // console.log(" ");
+    // console.log(x, y);
     fill(color("blue"));
     rect(x + w/2 - w/10, y + w/2-w/10, w/5, w/5);
   }
@@ -142,4 +142,8 @@ function removeWalls(a, b) {
 function restartGame() {
   location.reload();
   return false;
+}
+
+function changeSpeed(f) {
+  frameRate(f);
 }
