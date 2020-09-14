@@ -2,7 +2,7 @@
 
 
 let cols, rows;
-let w = 40;
+let w = 8;
 let grid = [];
 let current;
 let stack = [new Cell(0, 0)];
