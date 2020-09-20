@@ -26,6 +26,9 @@ class Solver {
     }
   }
   move() {
+    if (this.i === exitPoint[0] && this.j === exitPoint[1]) {
+      solved = true;
+    }
     solvedPath.push({"i" : this.i*w, "j" : this.j*w});
     if (this.current.walls[solveDirection(this.direction)] ||
         (this.facing.i === undefined || this.facing.j === undefined)) {//iswallfront

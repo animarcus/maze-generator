@@ -1,8 +1,6 @@
-
-
-
 let cols, rows;
-let w = 8;
+let w;
+let gridW;
 let grid = [];
 let current;
 let stack = [new Cell(0, 0)];
@@ -12,16 +10,21 @@ let solveOK;
 
 let exitPoint;
 
+let solvers = [];
 let solvedPath = [];
+let solved;
+
+
 
 function setup() {
-  createCanvas(400,400);
+  let localItems = handlers.getLocalItems();
+  w = parseInt(localItems[0]);
+  gridW = parseInt(localItems[1]);
+
+  createCanvas(gridW,gridW);
   cols = floor(width/w);
   rows = floor(width/w);
-  console.log(rows, cols);
   exitPoint = [rows-1,cols-1];
-
-  // frameRate(7);
 
   generated = false;
   solveOK = false;
@@ -36,6 +39,8 @@ function setup() {
 }
 
 function draw() {
+  handlers.displaySliders();
+
   background(51);
   for (let i = 0; i < grid.length; i++) {
     grid[i].show();
@@ -45,10 +50,11 @@ function draw() {
   if (!generated) {
     maze.generateMaze();
   } else if (solveOK) {
-    if (solver.i === exitPoint[0] && solver.j === exitPoint[1]) {
-      solver.i = 0;
-      solver.j = 0;
-      solvedPath = [];
+    if (solved) {
+      setTimeout(() => {
+        solvedPath = [];
+        handlers.resetMaze();
+      }, 4000);
     } else {
       maze.solveMaze();
     }
@@ -61,7 +67,6 @@ let maze = {
     current.visited = true;
     current.highlight();
     let next = current.checkNeighbors();
-    // console.log(stack);
     if (next) {
       next.visited = true;
       //step 2
@@ -74,7 +79,7 @@ let maze = {
       current = stack.pop();
       if (stack.length == 0) {
         frameRate(3);
-        solver = new Solver(0, 0);
+        solvers.push(new Solver(0, 0));
         generated = true;
 
         solveOK = true;
@@ -82,7 +87,6 @@ let maze = {
     }
   },
   solveMaze : function() {
-    // grid[0].highlight();
     noStroke();
     fill(color("white"));
     rect(grid[0].i, grid[0].j, w/3, w);
@@ -92,19 +96,23 @@ let maze = {
     rect(grid[grid.length-1].i*w + w, grid[grid.length-1].j*w + w, -w, -w/3);
 
     fill(color("red"));
-    // rect(solver.i+w/10,solver.j+w/10,w-w/5,w-w/5);
-    solver.draw();
-    solver.move();
+    for (let i = 0; i < solvers.length; i++) {
+      solvers[i].draw();
+      solvers[i].move();
+    }
   },
   drawSolvedPath : function(coords, index) {
     let x = coords.i;
     let y = coords.j;
-    // console.log(" ");
-    // console.log(x, y);
+
     fill(color("blue"));
     rect(x + w/2 - w/10, y + w/2-w/10, w/5, w/5);
   }
 };
+
+
+
+
 
 
 function index(i, j) {
@@ -133,17 +141,4 @@ function removeWalls(a, b) {
     a.walls[2] = false;
     b.walls[0] = false;
   }
-
-}
-
-
-
-
-function restartGame() {
-  location.reload();
-  return false;
-}
-
-function changeSpeed(f) {
-  frameRate(f);
 }

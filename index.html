@@ -12,9 +12,11 @@
   <meta name="theme-color" content="#ffffff">
 
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.1.4/lib/p5.min.js"></script>
+
   <script src="js/cell.js"></script>
   <script src="js/sketch.js"></script>
   <script src="js/solver.js"></script>
+
 
 
   <link rel="stylesheet" href="css/style.css">
@@ -22,14 +24,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <title>Maze Generator</title>
   <div>
-    <button onclick=restartGame()>restart puzzle</button>
+    <button onclick=handlers.restartGame()>restart puzzle</button>
     <hr>
     <p>Change speed of app</h1>
-    <button onclick=changeSpeed(60)>Fast</button>
-    <button onclick=changeSpeed(7)>Normal</button>
-    <button onclick=changeSpeed(3)>Slow</button>
+    <button onclick=handlers.changeSpeed(1000)>Fast</button>
+    <button onclick=handlers.changeSpeed(7)>Normal</button>
+    <button onclick=handlers.changeSpeed(3)>Slow</button>
   </div>
+  <div>
+    <input type="range" min="1" max="100" value="50" class="slider" id="cellSlider">
+    <input type="range" min="200" max="1000" value="400" class="slider" id="gridSlider">
+    <label id = "displaySize">cell width: 0  grid width: 0</label>
+
+    <button onclick="handlers.changeSize(80,400)">huge squares</button>
+    <button onclick="handlers.changeSize(50,400)">big squares</button>
+    <button onclick="handlers.changeSize(20,400)">medium squares</button>
+    <button onclick="handlers.changeSize(8,400)">small squares</button>
+
   </head>
+
+  <script src="js/page.js"></script>
 <body>
 </body>
 </html>
